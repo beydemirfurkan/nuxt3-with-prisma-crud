@@ -1,0 +1,43 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  name      String
+  role      String    @default("USER")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  signatures Signature[]
+}
+
+model Platform {
+  id        Int         @id @default(autoincrement())
+  name      String
+  logoUrl   String
+  number    String
+  email     String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  signatures Signature[]
+}
+
+model Signature {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String
+  email     String
+  userId    Int
+  platformId Int
+  user      User     @relation(fields: [userId], references: [id])
+  platform  Platform @relation(fields: [platformId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}

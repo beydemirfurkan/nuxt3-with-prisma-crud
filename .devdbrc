@@ -1,0 +1,6 @@
+[
+  {
+    "type": "sqlite",
+    "path": "c:\\Users\\furka\\Desktop\\my-nuxt3-app\\prisma\\dev.db"
+  }
+]
